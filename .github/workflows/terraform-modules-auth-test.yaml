@@ -1,6 +1,6 @@
 name: terraform modules auth using github app installation token
 on:
-  push:
+  ## push:
   workflow_dispatch:
 
 #These environment variables are used by the terraform azure provider to setup OIDD authenticate. 
