@@ -1,5 +1,6 @@
 name: terraform modules auth using github app installation token
 on:
+  push:
   workflow_dispatch:
 
 #These environment variables are used by the terraform azure provider to setup OIDD authenticate. 
@@ -43,6 +44,11 @@ jobs:
     # run: |
     #   ls -la
     #   cat txt.txt
+    - name: setup for tfmodule
+      run: |
+        git config --local --remove-section http."https://github.com/"
+        git config --global url."https://githubofkrishnadhas:${{ steps.app-token.outputs.token }}@github.com/devwithkrishna".insteadOf "https://github.com/devwithkrishna"
+
 
     - name: git config
       run: git config --list --show-origin
