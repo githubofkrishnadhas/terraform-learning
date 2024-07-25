@@ -1,0 +1,45 @@
+name: terraform modules auth using github app installation token
+on:
+  workflow_dispatch:
+
+run-name: terraform modules auth using github app installation token
+jobs:
+  terraform-modules-auth-using-github-app-installation-token:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout repo
+      uses: action/checkout@v4
+
+    - name: checking files
+      run: ls -latR
+
+    - name: Token generator
+      uses: githubofkrishnadhas/github-access-using-githubapp@v1
+      with:
+        github_app_id: ${{ secrets.TOKEN_GENERATOR_APPID }}
+        github_app_private_key: ${{ secrets.TOKEN_GENERATOR_PRIVATE_KEY }}
+        github_account_type: 'user'
+
+    - name: terraform setup
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: "1.5.7"
+
+    - name: terraform checking
+      run: terraform --version
+
+    - name: terraform init
+      run: terraform init
+
+    - name: terraform plan
+      run: terraform plan -out=plan.out
+
+    - name: check plan.out
+      run: ls -latR
+
+    - name: terraform apply
+      run: terraform apply --auto-approve
+
+
+
