@@ -20,12 +20,12 @@ jobs:
         github_app_private_key: ${{ secrets.TOKEN_GENERATOR_PRIVATE_KEY }}
         github_account_type: 'user'
 
-    - name: Checkout Repository
-      uses: actions/checkout@v4
-      with:
-        repository: 'devwithkrishna/azure-terraform-modules'
-        token: ${{ env.GH_APP_TOKEN }}
-        fetch-depth: 1
+    # - name: Checkout Repository
+    #   uses: actions/checkout@v4
+    #   with:
+    #     repository: 'devwithkrishna/azure-terraform-modules'
+    #     token: ${{ env.GH_APP_TOKEN }}
+    #     fetch-depth: 1
 
     - name: Verify Repository Access
       run: |
