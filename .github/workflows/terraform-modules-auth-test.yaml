@@ -22,25 +22,27 @@ jobs:
       run: ls -latR
 
     - name: Token generator
-      uses: githubofkrishnadhas/github-access-using-githubapp@v1
+      uses: actions/create-github-app-token@v1
+      id: app-token
       with:
-        github_app_id: ${{ secrets.TOKEN_GENERATOR_APPID }}
-        github_app_private_key: ${{ secrets.TOKEN_GENERATOR_PRIVATE_KEY }}
-        github_account_type: 'user'
+        app-id: ${{ secrets.TOKEN_GENERATOR_APPID }}
+        private-key: ${{ secrets.TOKEN_GENERATOR_PRIVATE_KEY }}
+        owner: 'devwithkrishna'
+        repositories: 'azure-terraform-modules'
 
     - name: echo token
       run: echo ${GH_APP_TOKEN} > txt.txt
 
-    - name: clone manually
-      uses: actions/checkout@v4
-      with:
-        repository: 'devwithkrishna/azure-terraform-modules'
-        token: ${{ env.GH_APP_TOKEN }}
+    # - name: clone manually
+    #   uses: actions/checkout@v4
+    #   with:
+    #     repository: 'devwithkrishna/azure-terraform-modules'
+    #     token: ${{ env.GH_APP_TOKEN }}
 
-    - name: text
-      run: |
-        ls -la
-        cat txt.txt
+    # - name: text
+    # run: |
+    #   ls -la
+    #   cat txt.txt
 
     - name: git config
       run: git config --list --show-origin
