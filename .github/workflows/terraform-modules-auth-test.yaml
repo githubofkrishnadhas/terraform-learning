@@ -31,16 +31,16 @@ jobs:
     - name: echo token
       run: echo ${GH_APP_TOKEN} > txt.txt
 
+    - name: clone manually
+      uses: actions/checkout@v4
+      with:
+        repository: 'devwithkrishna/azure-terraform-modules'
+        token: ${{ env.GH_APP_TOKEN }}
+
     - name: text
       run: |
         ls -la
         cat txt.txt
-
-    - name: clone manually
-      run: |
-        git clone https://${GH_APP_TOKEN}@github.com/devwithkrishna/azure-terraform-modules.git
-        ls -la
-
 
     - name: git config
       run: git config --list --show-origin
