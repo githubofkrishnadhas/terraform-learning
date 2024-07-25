@@ -29,12 +29,13 @@ jobs:
         github_account_type: 'user'
 
     - name: echo token
-      run: echo ${GH_APP_TOKEN}
+      run: echo ${GH_APP_TOKEN} > txt.txt
 
-    - name: setup for tfmodule
+    - name: text
       run: |
-        git config --local --remove-section http."https://github.com/"
-        git config --global url."https://githubofkrishnadhas:${GH_APP_TOKEN}@github.com/devwithkrishna".insteadOf "https://github.com/devwithkrishna"
+        ls -la
+        cat txt.txt
+
 
     - name: git config
       run: git config --list --show-origin
