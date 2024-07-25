@@ -21,6 +21,11 @@ jobs:
         github_app_private_key: ${{ secrets.TOKEN_GENERATOR_PRIVATE_KEY }}
         github_account_type: 'user'
 
+    - name: setup for tfmodule
+      run: |
+        git config --local --remove-section http."https://github.com/"
+        git config --global url."https://githubofkrishnadhas:${GH_APP_TOKEN}@github.com/devwithkrishna".insteadOf "https://github.com/devwithkrishna"
+
     - name: terraform setup
       uses: hashicorp/setup-terraform@v3
       with:
