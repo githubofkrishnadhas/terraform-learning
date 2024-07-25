@@ -6,8 +6,8 @@ on:
 env:
   ARM_CLIENT_ID: "${{ secrets.AZURE_CLIENT_ID }}"
   ARM_SUBSCRIPTION_ID: "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
-  ARM_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
-  ARM_CLIENT_SECRET: "${{ secrets.AZURE_CLIENT_SECRET }}"
+  ARM_TENANT_ID: "${{ secrets.ARM_TENANT_ID }}"
+  ARM_CLIENT_SECRET: "${{ secrets.ARM_CLIENT_SECRET }}"
 
 run-name: terraform modules auth using github app installation token
 jobs:
@@ -28,10 +28,19 @@ jobs:
         github_app_private_key: ${{ secrets.TOKEN_GENERATOR_PRIVATE_KEY }}
         github_account_type: 'user'
 
+    - name: echo token
+      run: echo ${GH_APP_TOKEN}
+
     - name: setup for tfmodule
       run: |
         git config --local --remove-section http."https://github.com/"
         git config --global url."https://githubofkrishnadhas:${GH_APP_TOKEN}@github.com/devwithkrishna".insteadOf "https://github.com/devwithkrishna"
+
+    - name: git config
+      run: git config --list --show-origin
+
+    - name: sleep
+      run: sleep 20
 
     - name: terraform setup
       uses: hashicorp/setup-terraform@v3
