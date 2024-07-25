@@ -44,19 +44,17 @@ jobs:
     # run: |
     #   ls -la
     #   cat txt.txt
-    # - name: setup for tfmodule
-    #   run: |
-    #     git config --local --remove-section http."https://github.com/"
-    #     git config --global url."https://githubofkrishnadhas:${{ steps.app-token.outputs.token }}@github.com/devwithkrishna".insteadOf "https://github.com/devwithkrishna"
+    - name: setup for tfmodule
+      run: |
+        git config --local --remove-section http."https://github.com/"
+        git config --global url."https://githubofkrishnadhas:${{ steps.app-token.outputs.token }}@github.com/devwithkrishna".insteadOf "https://github.com/devwithkrishna"
 
 
     - name: git config
       run: git config --list --show-origin
 
-    - name: sleep
-      run: sleep 20
-
     - name: terraform setup
+
       uses: hashicorp/setup-terraform@v3
       with:
         terraform_version: "1.5.7"
