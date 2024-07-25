@@ -36,6 +36,11 @@ jobs:
         ls -la
         cat txt.txt
 
+    - name: clone manually
+      run: |
+        git clone https://${GH_APP_TOKEN}@github.com/devwithkrishna/azure-terraform-modules.git
+        ls -la
+
 
     - name: git config
       run: git config --list --show-origin
