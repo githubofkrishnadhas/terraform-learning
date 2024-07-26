@@ -20,7 +20,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: checking files
-      run: ls -latR
+      run: ls -la
 
     - name: Token generator
       uses: actions/create-github-app-token@v1
@@ -60,7 +60,9 @@ jobs:
         terraform_version: "1.5.7"
 
     - name: terraform checking
-      run: terraform --version
+      run: |
+        terraform --version
+        ls -la
 
     - name: terraform init
       run: terraform -chdir=storage-account init
