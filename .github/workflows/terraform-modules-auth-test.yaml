@@ -2,6 +2,16 @@ name: terraform modules auth using github app installation token
 on:
   ## push:
   workflow_dispatch:
+    inputs:
+      action:
+        description: 'Choose action: apply or destroy'
+        required: true
+        default: 'apply'
+        type: choice
+        options:
+        - apply
+        - destroy
+
 
 #These environment variables are used by the terraform azure provider to setup OIDD authenticate. 
 env:
@@ -62,22 +72,17 @@ jobs:
     - name: terraform checking
       run: |
         terraform --version
-        ls -la
 
     - name: terraform init
       run: terraform -chdir=storage-account init
 
-    - name: module checking
-      run: ls -latR
+    - name: Terraform Plan
+      run: terraform plan -out=planfile ${{ github.event.inputs.action == 'destroy' && '-destroy' || '' }}
 
-    - name: terraform plan
-      run: terraform -chdir=storage-account plan -out=plan.out
+    - name: Terraform Apply
+      if: ${{ github.event.inputs.action == 'apply' }}
+      run: terraform apply -auto-approve planfile
 
-    - name: check plan.out
-      run: ls -latR
-
-    - name: terraform apply
-      run: terraform -chdir=storage-account apply --auto-approve
-
-
-
+    - name: Terraform Destroy
+      if: ${{ github.event.inputs.action == 'destroy' }}
+      run: terraform apply -auto-approve planfile
