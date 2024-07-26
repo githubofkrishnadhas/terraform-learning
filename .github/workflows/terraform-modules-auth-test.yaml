@@ -63,16 +63,16 @@ jobs:
       run: terraform --version
 
     - name: terraform init
-      run: terraform init
+      run: terraform -chdir=storage-account init
 
     - name: terraform plan
-      run: terraform plan -out=plan.out
+      run: terraform -chdir=storage-account plan -out=plan.out
 
     - name: check plan.out
       run: ls -latR
 
     - name: terraform apply
-      run: terraform apply --auto-approve
+      run: terraform -chdir=storage-account apply --auto-approve
 
 
 
