@@ -67,6 +67,9 @@ jobs:
     - name: terraform init
       run: terraform -chdir=storage-account init
 
+    - name: module checking
+      run: ls -latR
+
     - name: terraform plan
       run: terraform -chdir=storage-account plan -out=plan.out
 
