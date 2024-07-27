@@ -64,6 +64,8 @@ jobs:
     #   ls -la
     #   cat txt.txt
     - name: setup for tfmodule
+      env:
+        token: ${{ steps.app-token.outputs.token }}
       run: |
         git config --local --remove-section http."https://github.com/"
         git config --global url."https://githubofkrishnadhas:${{ steps.app-token.outputs.token }}@github.com/devwithkrishna".insteadOf "https://github.com/devwithkrishna"
