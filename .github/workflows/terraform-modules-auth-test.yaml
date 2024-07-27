@@ -33,7 +33,7 @@ jobs:
       run: ls -la
 
     - name: Token generator
-      uses: githubofkrishnadhas/github-access-using-githubapp@bugfix/owner
+      uses: githubofkrishnadhas/github-access-using-githubapp@v2
       id: app-token
       with:
         github_app_id: ${{ secrets.TOKEN_GENERATOR_APPID }}
@@ -43,7 +43,7 @@ jobs:
     - name: Print the token
       run: echo "Generated token ${{ steps.app-token.outputs.token }}"
     - name: Token generator current repo
-      uses: githubofkrishnadhas/github-access-using-githubapp@bugfix/owner
+      uses: githubofkrishnadhas/github-access-using-githubapp@v2
       id: app-token1
       with:
         github_app_id: ${{ secrets.TOKEN_GENERATOR_APPID }}
