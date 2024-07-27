@@ -40,6 +40,13 @@ jobs:
         github_app_private_key: ${{ secrets.TOKEN_GENERATOR_PRIVATE_KEY }}
         owner: 'devwithkrishna'
         repositories: 'azure-terraform-modules'
+    - name: Token generator current repo
+      uses: githubofkrishnadhas/github-access-using-githubapp@bugfix/owner
+      id: app-token1
+      with:
+        github_app_id: ${{ secrets.TOKEN_GENERATOR_APPID }}
+        github_app_private_key: ${{ secrets.TOKEN_GENERATOR_PRIVATE_KEY }}
+        
 
     - name: echo token
       run: echo ${GH_APP_TOKEN} > txt.txt
