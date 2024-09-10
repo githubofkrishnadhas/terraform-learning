@@ -9,13 +9,18 @@ module "vmss" {
   default_instance_count                     = 1
   environment                                = "DEV"
   location                                   = "centralindia"
-  os_disk_size                               = 30
+  os_disk_size                               = 32
   os_disk_storage_account_type               = "Standard_LRS"
   resource_group_name                        = "vmss-linux"
-  sku_size                                   = "Stadard_B2als_v2"
+  sku_size                                   = "Standard_D2_v3"
   subnet_name                                = "ARCHITECTS-PROTECTED-CI-SUBNET-2"
   vmss_name                                  = "vmss-linux"
   vnet_name                                  = "ARCHITECTS-CENTRAL-INDIA-VNET"
   vnet_resource_group                        = "ARCHITECTS-CENTRAL-INDIA-VNET-RG"
   priority                                   = "Spot"
+  load_balancer_sku                          = "Basic"
+  frontend_port                              = 80
+  backend_port                               = 80
+  request_path                               = 80
+  protocol                                   = "Http"
 }

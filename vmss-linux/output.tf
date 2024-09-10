@@ -19,7 +19,7 @@ output "type_of_instances" {
 }
 
 output "data_disks" {
-  value       = module.vmss.data_disks  
+  value       = module.vmss.data_disks
   description = "VMSS data disks"
 }
 
@@ -35,7 +35,16 @@ output "admin_password" {
 }
 
 output "admin_username" {
-  value = module.vmss.admin_username
+  value       = module.vmss.admin_username
   description = "VMSS user user"
 
+}
+output "loadbalancer_id" {
+  value       = module.vmss.loadbalancer_id
+  description = "AzureLoad balancer Id"
+}
+
+output "Load_balancer_frontend_public_ip" {
+  value       = module.vmss.Load_balancer_frontend_public_ip
+  description = "Azure load balancer frontend ip address"
 }
